@@ -63,18 +63,28 @@ public class TicTacToe {
         a better way over simple concatenation.
         Something I learned during my JUnit drills.
          */
-
+        var tileIndex = 0;
         for (var i = 0; i < 3; i++) {
-            sbBoard.append("   ").append("|").append("   ").append("|\n");
+            sbBoard.append("|---|---|---|\n");
             for (var j = 0; j < 3; j++) {
-                if (j < 2){
-                    sbBoard.append("___|");
-                } else{
-                    sbBoard.append("___\n");
+                if (j < 1){
+                    sbBoard.append("| " + "1" + " | " + "1" + " | " + "1" + " |\n");
+                }else{
+                    System.out.println();
                 }
             }
         }
 
         return sbBoard.toString();
     }
+
+    // Board Placement Method
+    public String placementBoard(int row, int column, char type) {
+        char place = Grid[row][column];
+
+
+
+        return null;
+    }
+
 }
