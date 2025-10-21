@@ -15,6 +15,7 @@ public class TicTacToe {
         ties = 0;
         highscore = 0;
         Grid = new char[3][3]; //This is how you declare a 2d char array. Goes by Row, Column
+
     }
 
     //Parameter Constructor
@@ -63,16 +64,13 @@ public class TicTacToe {
         a better way over simple concatenation.
         Something I learned during my JUnit drills.
          */
-        var tileIndex = 0;
+
         for (var i = 0; i < 3; i++) {
             sbBoard.append("|---|---|---|\n");
             for (var j = 0; j < 3; j++) {
-                if (j < 1){
-                    sbBoard.append("| " + "1" + " | " + "1" + " | " + "1" + " |\n");
-                }else{
-                    System.out.println();
-                }
+                sbBoard.append("| " + Grid[i][j] + " ");
             }
+            sbBoard.append("|\n");
         }
 
         return sbBoard.toString();
