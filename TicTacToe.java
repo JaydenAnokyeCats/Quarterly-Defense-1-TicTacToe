@@ -29,10 +29,10 @@ public class TicTacToe {
     //Accessors
     public void getStats() {
         System.out.printf("Wins: %s", wins);
-        System.out.printf("Losses: %s", losses);
-        System.out.printf("Ties: %s", ties);
-        System.out.printf("Highest Streak: %s", highscore);
-        System.out.printf("Win/Lose Ratio: %s", wins/losses);
+        System.out.printf("\nLosses: %s", losses);
+        System.out.printf("\nTies: %s", ties);
+        System.out.printf("\nHighest Streak: %s", highscore);
+        System.out.printf("\nWin/Lose Ratio: %s", wins/losses);
     }
 
     //Mutators
@@ -68,21 +68,27 @@ public class TicTacToe {
         for (var i = 0; i < 3; i++) {
             sbBoard.append("|---|---|---|\n");
             for (var j = 0; j < 3; j++) {
-                sbBoard.append("| " + Grid[i][j] + " ");
+                sbBoard.append("| " + "0" + " ");
             }
             sbBoard.append("|\n");
         }
 
         return sbBoard.toString();
+        
     }
 
     // Board Placement Method
-    public String placementBoard(int row, int column, char type) {
-        char place = Grid[row][column];
+    // public String placementBoard(int row, int column, char type) {
+    //     if (row =< 0 || row >= 2 && column =< 0 || column >= 2) {) {
+    //         char place = Grid[row][column];
+    //     } else {
+    //         return " try again.";
+    //     }
+        
 
 
 
-        return null;
-    }
+    //     return null;
+    // }
 
 }
