@@ -25,7 +25,7 @@ public class Main {
             System.out.println(game.createBoard());
             System.out.println("Player X's turn. Enter row (0, 1, or 2):");
             int row = scanner.nextInt();
-             System.out.println("Now enter a column (0, 1, or 2):");
+            System.out.println("Now enter a column (0, 1, or 2):");
             int col = scanner.nextInt();
         } else if (menuChoice == 2) {
             System.out.println("\nViewing Stats...\n");
