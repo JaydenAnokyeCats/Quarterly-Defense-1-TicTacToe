@@ -2,9 +2,7 @@ public class TicTacToe {
     // Variables
     private String name;
     private double wins;
-    private double losses;
     private int ties;
-    private int highscore;
     private char[][] Grid;
     private static final char PLAYER_X = 'X';
     private static final char PLAYER_O = 'O';
@@ -14,29 +12,26 @@ public class TicTacToe {
     public TicTacToe() {
         name = null;
         wins = 0;
-        losses = 0;
         ties = 0;
-        highscore = 0;
-        // Stats set to zero in default constructor
         Grid = new char[3][3]; //This is how you declare a 2d char array. Goes by Row, Column
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Grid[i][j] = ' ';
             }
         }
-
     }
 
     //Parameter Constructor
     public TicTacToe(String username) {
-      name = username;
-      Grid = new char[3][3];
-      for (int i = 0; i < 3; i++) {
+        name = username;
+        wins = 0;
+        ties = 0;
+        Grid = new char[3][3];
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Grid[i][j] = ' ';
             }
-        } 
-      
+        }
     }
 
     // Methods
@@ -44,40 +39,71 @@ public class TicTacToe {
     //Accessors
     public void getStats() {
         System.out.printf("Wins: %s", wins);
-        System.out.printf("\nLosses: %s", losses);
         System.out.printf("\nTies: %s", ties);
-        System.out.printf("\nHighest Streak: %s", highscore);
-        System.out.printf("\nWin/Lose Ratio: %s", wins/losses);
     }
 
     //Mutators
-    //These mutators call whenever the player wins, loses, or ties.
     public void addWins() {
         wins += 1;
-    }
-
-    public void addLoss() {
-        losses += 1;
     }
 
     public void addTies() {
         ties += 1;
     }
 
-    //Calls whenever the player gets a new high score
-    public int getHighscore(int highscore) {
-        this.highscore = highscore;
-        return highscore;
+
+    public void setCurrentPlayer(char player){
+        currentPlayer = player;
     }
 
-    // Sets the current player for the game
-    public void currentPlayer(char playerType) { 
+    public char getCurrentPlayer(){
+        return currentPlayer;
+    }
+
+
+    public void currentPlayer(char playerType) {
         if (playerType == PLAYER_X) {
             this.currentPlayer = PLAYER_X;
         } else if (playerType == PLAYER_O) {
-            this.currentPlayer = PLAYER_O; 
+            this.currentPlayer = PLAYER_O;
         }
-        // No return statement as the method is void
+    }
+
+
+
+    public void switchPlayer() {
+        if (currentPlayer == PLAYER_X) {
+            currentPlayer = PLAYER_O;
+        } else {
+            currentPlayer = PLAYER_X;
+        }
+    }
+
+    public boolean checkWin() {
+        for (int i = 0; i < 3; i++) {
+            if ((Grid[i][0] == currentPlayer && Grid[i][1] == currentPlayer && Grid[i][2] == currentPlayer) ||
+                    (Grid[0][i] == currentPlayer && Grid[1][i] == currentPlayer && Grid[2][i] == currentPlayer)) {
+                return true;
+            }
+        }
+
+        if ((Grid[0][0] == currentPlayer && Grid[1][1] == currentPlayer && Grid[2][2] == currentPlayer) ||
+                (Grid[0][2] == currentPlayer && Grid[1][1] == currentPlayer && Grid[2][0] == currentPlayer)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkTie() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (Grid[i][j] == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     //Board Printing Method
@@ -89,12 +115,11 @@ public class TicTacToe {
         a better way over simple concatenation.
         Something I learned during my JUnit drills.
          */
-        
+
         for (var i = 0; i < 3; i++) {
             sbBoard.append("|---|---|---|\n");
             for (var j = 0; j < 3; j++) {
-                sbBoard.append("| " + Grid[i][j] + " "); // Initializes empty spaces on the board
-                
+                sbBoard.append("| " + Grid[i][j] + " ");
             }
             sbBoard.append("|\n");
         }
@@ -102,12 +127,11 @@ public class TicTacToe {
         return sbBoard.toString();
     }
 
-
     // Board Placement Method
     public String placementBoard(int row, int column) {
         if (row >= 0 && row < 3 && column >= 0 && column < 3) {
-            if (Grid[row][column] == ' ' || Grid[row][column] == '\u0000') { // Check if the spot is empty 
-                Grid[row][column] = this.currentPlayer; // Use the instance variable currentPlayer
+            if (Grid[row][column] == ' ' || Grid[row][column] == '\u0000') {
+                Grid[row][column] = this.currentPlayer;
                 return "Placed.";
             } else {
                 return "This spot is already taken. Choose another spot.";
@@ -116,5 +140,4 @@ public class TicTacToe {
             return "Invalid placement. Choose row and column between 0 and 2.";
         }
     }
-
 }
