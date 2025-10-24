@@ -17,6 +17,7 @@ public class TicTacToe {
         losses = 0;
         ties = 0;
         highscore = 0;
+        // Stats set to zero in default constructor
         Grid = new char[3][3]; //This is how you declare a 2d char array. Goes by Row, Column
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -35,7 +36,7 @@ public class TicTacToe {
                 Grid[i][j] = ' ';
             }
         } 
-      // Stats set to zero in default constructor
+      
     }
 
     // Methods
@@ -107,12 +108,12 @@ public class TicTacToe {
         if (row >= 0 && row < 3 && column >= 0 && column < 3) {
             if (Grid[row][column] == ' ' || Grid[row][column] == '\u0000') { // Check if the spot is empty 
                 Grid[row][column] = this.currentPlayer; // Use the instance variable currentPlayer
-                return "Placement successful.";
+                return "Placed.";
             } else {
-                return "Spot already taken. Please choose another spot.";
+                return "This spot is already taken. Choose another spot.";
             }
         } else {
-            return "Invalid placement. Please choose row and column between 0 and 2.";
+            return "Invalid placement. Choose row and column between 0 and 2.";
         }
     }
 
