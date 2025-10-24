@@ -99,16 +99,6 @@ public class TicTacToe {
         }
 
         return sbBoard.toString();
-        // StringBuilder boardString = new StringBuilder();
-        // for (int i = 0; i < 3; i++) {
-        //     for (int j = 0; j < 3; j++) {
-        //         boardString.append(" " + Grid[i][j] + " ");
-        //         if (j < 2) boardString.append("|");
-        //     }
-        //     boardString.append("\n");
-        //     if (i < 2) boardString.append("---+---+---\n");
-        // }
-        // return boardString.toString();
     }
 
 
