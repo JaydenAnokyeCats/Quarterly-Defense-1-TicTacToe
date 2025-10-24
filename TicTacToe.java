@@ -6,6 +6,9 @@ public class TicTacToe {
     private int ties;
     private int highscore;
     private char[][] Grid;
+    private static final char PLAYER_X = 'X';
+    private static final char PLAYER_O = 'O';
+    private char currentPlayer = ' ';
 
     //Default Constructor
     public TicTacToe() {
@@ -15,12 +18,23 @@ public class TicTacToe {
         ties = 0;
         highscore = 0;
         Grid = new char[3][3]; //This is how you declare a 2d char array. Goes by Row, Column
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Grid[i][j] = ' ';
+            }
+        }
 
     }
 
     //Parameter Constructor
     public TicTacToe(String username) {
       name = username;
+      Grid = new char[3][3];
+      for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Grid[i][j] = ' ';
+            }
+        } 
       // Stats set to zero in default constructor
     }
 
@@ -55,8 +69,18 @@ public class TicTacToe {
         return highscore;
     }
 
-    //Board Creation Method
-    public String createBoard() {
+    // Sets the current player for the game
+    public void currentPlayer(char playerType) { 
+        if (playerType == PLAYER_X) {
+            this.currentPlayer = PLAYER_X;
+        } else if (playerType == PLAYER_O) {
+            this.currentPlayer = PLAYER_O; 
+        }
+        // No return statement as the method is void
+    }
+
+    //Board Printing Method
+    public String printBoard() {
         StringBuilder sbBoard = new StringBuilder();
 
         /* StringBuilder is a more effective method when dealing with strings.
@@ -64,31 +88,42 @@ public class TicTacToe {
         a better way over simple concatenation.
         Something I learned during my JUnit drills.
          */
-
+        
         for (var i = 0; i < 3; i++) {
             sbBoard.append("|---|---|---|\n");
             for (var j = 0; j < 3; j++) {
-                sbBoard.append("| " + "0" + " ");
+                sbBoard.append("| " + Grid[i][j] + " "); // Initializes empty spaces on the board
+                
             }
             sbBoard.append("|\n");
         }
 
         return sbBoard.toString();
-        
+        // StringBuilder boardString = new StringBuilder();
+        // for (int i = 0; i < 3; i++) {
+        //     for (int j = 0; j < 3; j++) {
+        //         boardString.append(" " + Grid[i][j] + " ");
+        //         if (j < 2) boardString.append("|");
+        //     }
+        //     boardString.append("\n");
+        //     if (i < 2) boardString.append("---+---+---\n");
+        // }
+        // return boardString.toString();
     }
 
+
     // Board Placement Method
-    // public String placementBoard(int row, int column, char type) {
-    //     if (row =< 0 || row >= 2 && column =< 0 || column >= 2) {) {
-    //         char place = Grid[row][column];
-    //     } else {
-    //         return " try again.";
-    //     }
-        
-
-
-
-    //     return null;
-    // }
+    public String placementBoard(int row, int column) {
+        if (row >= 0 && row < 3 && column >= 0 && column < 3) {
+            if (Grid[row][column] == ' ' || Grid[row][column] == '\u0000') { // Check if the spot is empty 
+                Grid[row][column] = this.currentPlayer; // Use the instance variable currentPlayer
+                return "Placement successful.";
+            } else {
+                return "Spot already taken. Please choose another spot.";
+            }
+        } else {
+            return "Invalid placement. Please choose row and column between 0 and 2.";
+        }
+    }
 
 }

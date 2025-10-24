@@ -22,11 +22,19 @@ public class Main {
             System.out.println("(e.g., top-left is row 0, column 0; bottom-right is row 2, column 2).");
             System.out.println("Take turns placing your X's and O's. First to get 3 in a row wins!");
             // Game logic would go here
-            System.out.println(game.createBoard());
+            // System.out.println(game.createBoard());
+            System.out.println(game.printBoard());
             System.out.println("Player X's turn. Enter row (0, 1, or 2):");
             int row = scanner.nextInt();
             System.out.println("Now enter a column (0, 1, or 2):");
             int col = scanner.nextInt();
+            
+            game.currentPlayer('X');
+            game.placementBoard(row,col);
+            
+            System.out.println(game.printBoard());
+
+
         } else if (menuChoice == 2) {
             System.out.println("\nViewing Stats...\n");
             game.getStats();
