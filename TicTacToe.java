@@ -1,7 +1,8 @@
 public class TicTacToe {
     // Variables
     private String name;
-    private double wins;
+    private int winsX;
+    private int winsO;
     private int ties;
     private char[][] Grid;
     private static final char PLAYER_X = 'X';
@@ -11,7 +12,8 @@ public class TicTacToe {
     //Default Constructor
     public TicTacToe() {
         name = null;
-        wins = 0;
+        winsX = 0;
+        winsO = 0;
         ties = 0;
         Grid = new char[3][3]; //This is how you declare a 2d char array. Goes by Row, Column
         for (int i = 0; i < 3; i++) {
@@ -24,7 +26,8 @@ public class TicTacToe {
     //Parameter Constructor
     public TicTacToe(String username) {
         name = username;
-        wins = 0;
+        winsX = 0;
+        winsO = 0;
         ties = 0;
         Grid = new char[3][3];
         for (int i = 0; i < 3; i++) {
@@ -38,13 +41,17 @@ public class TicTacToe {
 
     //Accessors
     public void getStats() {
-        System.out.printf("Wins: %s", wins);
-        System.out.printf("\nTies: %s", ties);
+        System.out.printf("Wins (X): %s", winsX);
+        System.out.printf("\nWins (O): %s", winsO + "\n");
+        System.out.printf("\nTies: %s", ties + "\n");
     }
 
     //Mutators
-    public void addWins() {
-        wins += 1;
+    public void addWinsX() {
+        winsX += 1;
+    }
+    public void addWinsO() {
+        winsO += 1;
     }
 
     public void addTies() {
@@ -52,23 +59,22 @@ public class TicTacToe {
     }
 
 
-    public void setCurrentPlayer(char player){
-        currentPlayer = player;
+    // Sets the current player for the game
+    public void setCurrentPlayer(char player) {
+        if (player == PLAYER_X) {
+            currentPlayer = PLAYER_X;
+        } else if (player == PLAYER_O) {
+            currentPlayer = PLAYER_O;
+        }
     }
 
     public char getCurrentPlayer(){
         return currentPlayer;
     }
 
-
-    public void currentPlayer(char playerType) {
-        if (playerType == PLAYER_X) {
-            this.currentPlayer = PLAYER_X;
-        } else if (playerType == PLAYER_O) {
-            this.currentPlayer = PLAYER_O;
-        }
+    public String getName(){
+        return name;
     }
-
 
 
     public void switchPlayer() {
@@ -80,6 +86,11 @@ public class TicTacToe {
     }
 
     public boolean checkWin() {
+             /*
+             Vertical and Horizontal Win checking. Reason why 'j' isn't here despite it representing the column,
+             is because of the use of the for loop. I represents the column or row, and checks for any 3 way match.
+             If there is none, increment until i is less than 3 (since the rows and columns go by 0-2)
+             */
         for (int i = 0; i < 3; i++) {
             if ((Grid[i][0] == currentPlayer && Grid[i][1] == currentPlayer && Grid[i][2] == currentPlayer) ||
                     (Grid[0][i] == currentPlayer && Grid[1][i] == currentPlayer && Grid[2][i] == currentPlayer)) {
@@ -87,6 +98,7 @@ public class TicTacToe {
             }
         }
 
+        // Diagonal Win checking
         if ((Grid[0][0] == currentPlayer && Grid[1][1] == currentPlayer && Grid[2][2] == currentPlayer) ||
                 (Grid[0][2] == currentPlayer && Grid[1][1] == currentPlayer && Grid[2][0] == currentPlayer)) {
             return true;
@@ -96,6 +108,8 @@ public class TicTacToe {
     }
 
     public boolean checkTie() {
+        // Goes through the 3x3 grid and checks if there are any white spaces left. If not, return true.
+        // Returning true means the board has been filled without a match, otherwise known as a tie.
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (Grid[i][j] == ' ') {
@@ -140,4 +154,21 @@ public class TicTacToe {
             return "Invalid placement. Choose row and column between 0 and 2.";
         }
     }
+
+
+    // Extras
+
+
+    // Starting text, just describes how the game works
+    public void printInstruct(){
+        System.out.println("Starting Game...");
+        System.out.println("The board is 3x3, with rows and columns numbered 0 to 2.");
+        System.out.println("(e.g., top-left is row 0, column 0; bottom-right is row 2, column 2).\n");
+        System.out.println("Take turns placing your X's and O's. First to get 3 in a row wins!\n");
+
+        System.out.print("Do you want to manually select your player, or leave it up to chance? (Type 'manual' or 'chance'): ");
+    }
+
+
 }
+
