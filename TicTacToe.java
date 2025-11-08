@@ -43,7 +43,7 @@ public class TicTacToe {
     public void getStats() {
         System.out.printf("Wins (X): %s", winsX);
         System.out.printf("\nWins (O): %s", winsO + "\n");
-        System.out.printf("\nTies: %s", ties + "\n");
+        System.out.printf("Ties: %s", ties + "\n");
     }
 
     //Mutators
@@ -152,6 +152,16 @@ public class TicTacToe {
             }
         } else {
             return "Invalid placement. Choose row and column between 0 and 2.";
+        }
+    }
+
+    // Board Reset Method
+    public void resetBoard(){
+        Grid = new char[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Grid[i][j] = ' ';
+            }
         }
     }
 

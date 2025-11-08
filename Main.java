@@ -76,6 +76,7 @@ public class Main {
                 // Game logic here
                 System.out.println(game.printBoard());
                 while (gameLoop) {
+                    
                     System.out.println("Player " + game.getCurrentPlayer() + "'s turn. Enter your row (0, 1, or 2):");
                     int row = scanner.nextInt();
                     System.out.println("Now enter a column (0, 1, or 2):");
@@ -97,11 +98,15 @@ public class Main {
                             }else{
                                 game.addWinsO();
                             }
+                            Thread.sleep(2000);
+                            game.resetBoard();
                             gameLoop = false;
                         } else if (game.checkTie()) {
 
                             System.out.println("Tied game! Nobody wins.");
                             game.addTies();
+                            Thread.sleep(2000);
+                            game.resetBoard();
                             gameLoop = false;
                         } else {
                             game.switchPlayer();
